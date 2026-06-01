@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Noise-Cancelling Headphones",
+    "category": "Electronics",
+    "price": 249.0,
+    "currency": "EUR",
+    "tag": "New",
+    "color": "#1f6feb",
+    "image": "",
+    "inStock": true
+  },
+  {
+    "id": 2,
+    "name": "Runner Pro Sneakers",
+    "category": "Sneakers",
+    "price": 139.9,
+    "currency": "EUR",
+    "tag": "Hot",
+    "color": "#c6ff00",
+    "image": "",
+    "inStock": true
+  },
+  {
+    "id": 3,
+    "name": "Mechanical Keyboard 75%",
+    "category": "Electronics",
+    "price": 119.0,
+    "currency": "EUR",
+    "tag": "",
+    "color": "#ff6b6b",
+    "image": "",
+    "inStock": true
+  },
+  {
+    "id": 4,
+    "name": "High-Top Canvas Sneakers",
+    "category": "Sneakers",
+    "price": 89.0,
+    "currency": "EUR",
+    "tag": "",
+    "color": "#ff9f1c",
+    "image": "",
+    "inStock": false
+  },
+  {
+    "id": 5,
+    "name": "Smartwatch Series X",
+    "category": "Electronics",
+    "price": 299.0,
+    "currency": "EUR",
+    "tag": "New",
+    "color": "#9b5de5",
+    "image": "",
+    "inStock": true
+  },
+  {
+    "id": 6,
+    "name": "Retro Court Sneakers",
+    "category": "Sneakers",
+    "price": 109.5,
+    "currency": "EUR",
+    "tag": "",
+    "color": "#00bbf9",
+    "image": "",
+    "inStock": true
+  },
+  {
+    "id": 7,
+    "name": "Portable Bluetooth Speaker",
+    "category": "Electronics",
+    "price": 79.0,
+    "currency": "EUR",
+    "tag": "Sale",
+    "color": "#f15bb5",
+    "image": "",
+    "inStock": true
+  },
+  {
+    "id": 8,
+    "name": "Trail Running Sneakers",
+    "category": "Sneakers",
+    "price": 159.0,
+    "currency": "EUR",
+    "tag": "",
+    "color": "#06d6a0",
+    "image": "",
+    "inStock": true
+  },
+  {
+    "id": 9,
+    "name": "Action Camera 4K",
+    "category": "Electronics",
+    "price": 219.0,
+    "currency": "EUR",
+    "tag": "",
+    "color": "#ffd166",
+    "image": "",
+    "inStock": false
+  },
+  {
+    "id": 10,
+    "name": "Chunky Dad Sneakers",
+    "category": "Sneakers",
+    "price": 129.0,
+    "currency": "EUR",
+    "tag": "Hot",
+    "color": "#ef476f",
+    "image": "",
+    "inStock": true
+  },
+  {
+    "id": 11,
+    "name": "USB-C Fast Charger 65W",
+    "category": "Electronics",
+    "price": 39.9,
+    "currency": "EUR",
+    "tag": "",
+    "color": "#118ab2",
+    "image": "",
+    "inStock": true
+  },
+  {
+    "id": 12,
+    "name": "Minimalist Slip-On Sneakers",
+    "category": "Sneakers",
+    "price": 95.0,
+    "currency": "EUR",
+    "tag": "New",
+    "color": "#8338ec",
+    "image": "",
+    "inStock": true
+  }
+]

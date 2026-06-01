@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOIR — Catalogo Prodotti</title>
+  <meta name="description" content="Catalogo prodotti in dark mode con ricerca e filtri per categoria." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-mark">◆</span>
+      <span class="brand-name">NOIR<span class="brand-dot">.</span>store</span>
+    </div>
+    <div class="header-meta">
+      <span id="count-pill" class="pill">— prodotti</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Il catalogo.<br /><span class="hero-accent">Tutto in un posto.</span></h1>
+      <p class="hero-sub">Cerca, filtra per categoria e trova quello che ti serve.</p>
+    </section>
+
+    <section class="controls">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+        </svg>
+        <input
+          type="search"
+          id="search"
+          placeholder="Cerca un prodotto…"
+          autocomplete="off"
+          aria-label="Cerca prodotti"
+        />
+      </div>
+
+      <div class="filters" id="filters" role="group" aria-label="Filtri categoria"></div>
+
+      <div class="sort-wrap">
+        <select id="sort" aria-label="Ordina prodotti">
+          <option value="default">Ordina: rilevanza</option>
+          <option value="price-asc">Prezzo: crescente</option>
+          <option value="price-desc">Prezzo: decrescente</option>
+          <option value="name-asc">Nome: A–Z</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="grid" id="grid" aria-live="polite"></section>
+
+    <section class="empty" id="empty" hidden>
+      <p class="empty-title">Nessun risultato</p>
+      <p class="empty-sub">Prova a modificare la ricerca o i filtri.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>NOIR.store — demo catalogo. Modifica <code>products.json</code> per i tuoi prodotti.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
