@@ -156,40 +156,65 @@
     </section>
 
     <!-- Admin panel -->
-    <section id="adminPanel" class="mt-10 hidden">
-      <div class="rounded-2xl border theme-border bg-white p-5 shadow-sm">
-        <div class="mb-4 flex items-center justify-between">
-          <h2 class="text-lg font-semibold">Products Admin</h2>
+    <section id="adminPanel" class="mt-12 hidden">
+      <div class="rounded-3xl border theme-border bg-white p-6 shadow-xl dark:bg-zinc-900 dark:text-white transition-all duration-300">
+        <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b theme-border pb-4">
+          <div>
+            <h2 class="text-xl font-bold tracking-tight">System Dashboard</h2>
+            <p class="text-xs theme-muted">Manage catalog configurations, styles, links, and items.</p>
+          </div>
           <div class="flex items-center gap-2">
-            <button id="saveBtn" class="btn rounded-lg border theme-border bg-white px-3 py-1.5 text-sm hover:bg-zinc-50">Save to Server</button>
-            <button id="loadBtn" class="btn rounded-lg border theme-border bg-white px-3 py-1.5 text-sm hover:bg-zinc-50">Reload</button>
+            <button id="saveBtn" class="btn rounded-xl border theme-border bg-white px-4 py-2 text-sm font-semibold hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition">
+              <i class="fa-solid fa-cloud-arrow-up mr-1.5"></i>Save to Server
+            </button>
+            <button id="loadBtn" class="btn rounded-xl border theme-border bg-white px-4 py-2 text-sm font-semibold hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition">
+              <i class="fa-solid fa-rotate mr-1.5"></i>Reload
+            </button>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:items-start">
-          <div class="space-y-3 self-start">
-            <h3 class="font-medium">Header (shared config)</h3>
+        <!-- Admin Tabs Header -->
+        <div class="mb-6 flex border-b theme-border gap-2 overflow-x-auto pb-px scrollbar-none">
+          <button id="btnTabGeneral" class="admin-tab-btn active px-4 py-2.5 text-sm font-semibold border-b-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 transition" type="button">
+            <i class="fa-solid fa-sliders mr-2"></i>General & Theme
+          </button>
+          <button id="btnTabLinks" class="admin-tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 transition" type="button">
+            <i class="fa-solid fa-link mr-2"></i>Category Shortcuts
+          </button>
+          <button id="btnTabProducts" class="admin-tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 transition" type="button">
+            <i class="fa-solid fa-cubes mr-2"></i>Products Inventory
+          </button>
+        </div>
 
-            <label class="block text-sm">Brand / Name
-              <input id="iName" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none" />
-            </label>
+        <!-- Tab 1: General & Theme Settings -->
+        <div id="adminTab-general" class="admin-tab-content space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+            <div class="space-y-4 bg-zinc-50 dark:bg-zinc-800/40 p-5 rounded-2xl border theme-border">
+              <h3 class="font-bold text-sm tracking-wide uppercase text-zinc-400">Header Profile</h3>
 
-            <label class="block text-sm">Tagline
-              <input id="iBio" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none" />
-            </label>
+              <label class="block text-sm font-medium">Brand / Name
+                <input id="iName" class="mt-1.5 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none dark:bg-zinc-800 focus:ring-2 focus:ring-blue-500/20" />
+              </label>
 
-            <label class="block text-sm">Avatar URL
-              <input id="iAvatar" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none" />
-            </label>
-          </div>
+              <label class="block text-sm font-medium">Tagline
+                <input id="iBio" class="mt-1.5 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none dark:bg-zinc-800 focus:ring-2 focus:ring-blue-500/20" />
+              </label>
 
-          <div class="space-y-3 self-start">
-            <h3 class="font-medium">Theme (shared config)</h3>
+              <label class="block text-sm font-medium">Avatar URL
+                <input id="iAvatar" class="mt-1.5 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none dark:bg-zinc-800 focus:ring-2 focus:ring-blue-500/20" />
+              </label>
 
-            <div class="rounded-xl border theme-border p-3">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <label class="block text-sm">Font
-                  <select id="iFont" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none">
+              <label class="block text-sm font-medium">Admin Security Password
+                <input id="iAdminPassword" type="password" class="mt-1.5 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none dark:bg-zinc-800 focus:ring-2 focus:ring-blue-500/20" placeholder="••••••••" />
+              </label>
+            </div>
+
+            <div class="space-y-4 bg-zinc-50 dark:bg-zinc-800/40 p-5 rounded-2xl border theme-border">
+              <h3 class="font-bold text-sm tracking-wide uppercase text-zinc-400">Theme Styles</h3>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label class="block text-sm font-medium">Font Family
+                  <select id="iFont" class="mt-1.5 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none dark:bg-zinc-800 focus:ring-2 focus:ring-blue-500/20">
                     <option value="Inter">Inter</option>
                     <option value="Roboto">Roboto</option>
                     <option value="Open Sans">Open Sans</option>
@@ -198,159 +223,161 @@
                   </select>
                 </label>
 
-                <label class="block text-sm">Primary
-                  <input id="iPrimary" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
+                <label class="block text-sm font-medium">Primary Theme Color
+                  <input id="iPrimary" type="color" class="mt-1.5 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1 dark:bg-zinc-800 cursor-pointer" />
                 </label>
 
-                <label class="block text-sm">Background
-                  <input id="iBg" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
+                <label class="block text-sm font-medium">Background Color
+                  <input id="iBg" type="color" class="mt-1.5 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1 dark:bg-zinc-800 cursor-pointer" />
                 </label>
 
-                <label class="block text-sm">Text
-                  <input id="iText" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
+                <label class="block text-sm font-medium">Text Color
+                  <input id="iText" type="color" class="mt-1.5 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1 dark:bg-zinc-800 cursor-pointer" />
                 </label>
 
-                <label class="block text-sm">Border
-                  <input id="iBorder" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
+                <label class="block text-sm font-medium">Border Color
+                  <input id="iBorder" type="color" class="mt-1.5 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1 dark:bg-zinc-800 cursor-pointer" />
                 </label>
 
-                <label class="block text-sm">Desktop columns (products + links)
-                  <select id="iColsDesktop" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none">
-                    <option value="3">3</option>
-                    <option value="4" selected>4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
+                <label class="block text-sm font-medium">Desktop Grid Columns
+                  <select id="iColsDesktop" class="mt-1.5 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none dark:bg-zinc-800 focus:ring-2 focus:ring-blue-500/20">
+                    <option value="3">3 Columns</option>
+                    <option value="4" selected>4 Columns</option>
+                    <option value="5">5 Columns</option>
+                    <option value="6">6 Columns</option>
                   </select>
                 </label>
 
-                <label class="block text-sm">Title style
-                  <select id="iTitleStyle" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none">
-                    <option value="a">Option A (premium gradient)</option>
-                    <option value="b">Option B (embossed outline)</option>
+                <label class="block text-sm font-medium">Title Display Style
+                  <select id="iTitleStyle" class="mt-1.5 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none dark:bg-zinc-800 focus:ring-2 focus:ring-blue-500/20">
+                    <option value="a">Option A (gradient glow)</option>
+                    <option value="b">Option B (classic solid)</option>
                   </select>
                 </label>
 
-                <label class="inline-flex items-center gap-2 text-sm mt-2">
-                  <input id="iTitleGlow" type="checkbox" class="rounded" />
-                  Title: subtle glow
+                <label class="inline-flex items-center gap-2 text-sm mt-6 font-medium cursor-pointer">
+                  <input id="iTitleGlow" type="checkbox" class="rounded border-zinc-300 text-blue-600 focus:ring-blue-500" />
+                  Title subtle background glow
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+            <div class="space-y-4 bg-zinc-50 dark:bg-zinc-800/40 p-5 rounded-2xl border theme-border">
+              <h3 class="font-bold text-sm tracking-wide uppercase text-zinc-400">Notice Banner Settings</h3>
+              
+              <div class="flex flex-wrap gap-4">
+                <label class="inline-flex items-center gap-2 text-sm font-medium cursor-pointer">
+                  <input id="iBannerEnabled" type="checkbox" class="rounded border-zinc-300 text-blue-600 focus:ring-blue-500" />
+                  Enable top banner
+                </label>
+                <label class="inline-flex items-center gap-2 text-sm font-medium cursor-pointer">
+                  <input id="iBannerBold" type="checkbox" class="rounded border-zinc-300 text-blue-600 focus:ring-blue-500" />
+                  Bold banner text
+                </label>
+              </div>
+
+              <label class="block text-sm font-medium">Banner Message (HTML allowed)
+                <textarea id="iBannerText" rows="2" class="mt-1.5 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none dark:bg-zinc-800 focus:ring-2 focus:ring-blue-500/20"></textarea>
+              </label>
+
+              <div class="grid grid-cols-3 gap-3">
+                <label class="block text-xs font-semibold uppercase text-zinc-400">Background
+                  <input id="iBannerBg" type="color" class="mt-1 h-9 w-full rounded-lg border theme-border bg-white px-1 py-0.5 dark:bg-zinc-800 cursor-pointer" />
+                </label>
+                <label class="block text-xs font-semibold uppercase text-zinc-400">Text Color
+                  <input id="iBannerTextColor" type="color" class="mt-1 h-9 w-full rounded-lg border theme-border bg-white px-1 py-0.5 dark:bg-zinc-800 cursor-pointer" />
+                </label>
+                <label class="block text-xs font-semibold uppercase text-zinc-400">Border
+                  <input id="iBannerBorderColor" type="color" class="mt-1 h-9 w-full rounded-lg border theme-border bg-white px-1 py-0.5 dark:bg-zinc-800 cursor-pointer" />
                 </label>
               </div>
             </div>
 
-            <div class="rounded-xl border theme-border p-3 space-y-2 mt-3">
-              <h3 class="font-medium">Top Warning Banner</h3>
-              <label class="inline-flex items-center gap-2 text-sm">
-                <input id="iBannerEnabled" type="checkbox" class="rounded" />
-                Show warning banner at top of page
+            <div class="space-y-4 bg-zinc-50 dark:bg-zinc-800/40 p-5 rounded-2xl border theme-border">
+              <h3 class="font-bold text-sm tracking-wide uppercase text-zinc-400">SEO Page Copy</h3>
+              <label class="block text-sm font-medium">Main Catalog Title
+                <input id="iProductsTitle" class="mt-1.5 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none dark:bg-zinc-800 focus:ring-2 focus:ring-blue-500/20" placeholder="Kakobuy Products — Verified Picks" />
               </label>
-              <label class="inline-flex items-center gap-2 text-sm">
-                <input id="iBannerBold" type="checkbox" class="rounded" />
-                Bold banner text
-              </label>
-              <label class="block text-sm">Banner Text
-                <textarea id="iBannerText" rows="2" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none"></textarea>
-              </label>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <label class="block text-sm">Background
-                  <input id="iBannerBg" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
-                </label>
-                <label class="block text-sm">Text Color
-                  <input id="iBannerTextColor" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
-                </label>
-                <label class="block text-sm">Border Color
-                  <input id="iBannerBorderColor" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
-                </label>
-              </div>
-              <p class="text-xs theme-muted">HTML is allowed in banner text.</p>
-            </div>
-
-            <div class="rounded-xl border theme-border p-3 space-y-2 mt-3">
-              <h3 class="font-medium">Products Page Text</h3>
-              <label class="block text-sm">Page Title
-                <input id="iProductsTitle" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none" placeholder="Kakobuy Products — Verified Picks" />
-              </label>
-              <label class="block text-sm">Page Subtitle
-                <input id="iProductsSubtitle" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none" placeholder="Curated items with images..." />
+              <label class="block text-sm font-medium">Catalog Subtitle Tagline
+                <input id="iProductsSubtitle" class="mt-1.5 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none dark:bg-zinc-800 focus:ring-2 focus:ring-blue-500/20" placeholder="Curated items with images..." />
               </label>
             </div>
           </div>
         </div>
 
-        <!-- Category Links editor -->
-        <details class="mt-6 rounded-xl border theme-border bg-white-50 p-4 space-y-3">
-          <summary class="cursor-pointer list-none font-medium text-base flex items-center justify-between">
-            <span>Category Link Cards (shown above products)</span>
-            <span class="text-xs theme-muted">Click to expand/collapse</span>
-          </summary>
-        
-          <div class="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <h3 class="font-medium">Category Link Cards (shown above products)</h3>
+        <!-- Tab 2: Category Link Cards -->
+        <div id="adminTab-links" class="admin-tab-content hidden space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-zinc-50 dark:bg-zinc-800/40 p-4 rounded-2xl border theme-border">
+            <div>
+              <h3 class="font-semibold text-sm">Quick Category Shortcut Cards</h3>
+              <p class="text-xs theme-muted">These card blocks appear when a specific category is activated.</p>
+            </div>
             <div class="flex items-center gap-2">
-              <button id="addCatLinkBtn" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">+ Add Link Card</button>
-              <select id="iCatLinksFilter" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none">
-                <option value="">All categories</option>
+              <button id="addCatLinkBtn" class="rounded-xl border theme-border bg-white px-4 py-2 text-sm font-semibold hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition">+ Add Link Card</button>
+              <select id="iCatLinksFilter" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none dark:bg-zinc-800">
+                <option value="">All Categories</option>
               </select>
             </div>
           </div>
         
-          <ul id="catLinksEditor" class="space-y-2"></ul>
-        
-          <p class="mt-2 text-xs theme-muted">
-            These cards appear when a category is selected (or when the URL has <code>?cat=CategoryName</code>).
-          </p>
-        </details>
+          <ul id="catLinksEditor" class="grid grid-cols-1 gap-4"></ul>
+        </div>
 
-        <div class="mt-6 rounded-xl border theme-border bg-pink-50 p-4 space-y-3">
-          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-            <h3 class="font-medium">Products</h3>
+        <!-- Tab 3: Products Manager -->
+        <div id="adminTab-products" class="admin-tab-content hidden space-y-4">
+          <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4 bg-zinc-50 dark:bg-zinc-800/40 p-4 rounded-2xl border theme-border">
+            <div>
+              <h3 class="font-semibold text-sm">Products Directory</h3>
+              <p class="text-xs theme-muted">Configure and position listing item details, pricing, and URLs.</p>
+            </div>
 
             <!-- admin find box (jump to # / text) -->
-            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-              <div class="flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-xl px-2 py-1">
-                <input id="adminFind" class="w-64 rounded-lg bg-white px-3 py-2 text-sm outline-none"
-                       placeholder="🔍 Jump to # (e.g. 500) or search..." />
-                <button id="adminFindBtn" class="rounded-lg bg-blue-600 text-white px-3 py-2 text-sm hover:bg-blue-700">
-                  Go
+            <div class="flex flex-wrap items-center gap-2">
+              <div class="flex items-center gap-1.5 bg-white border theme-border rounded-xl px-2 py-1.5 dark:bg-zinc-800">
+                <input id="adminFind" class="w-48 sm:w-64 bg-transparent px-2 text-sm outline-none"
+                       placeholder="🔍 Jump to # (e.g. 5) or search..." />
+                <button id="adminFindBtn" class="rounded-lg bg-blue-600 text-white px-3 py-1 text-sm font-semibold hover:bg-blue-700 transition">
+                  Search
                 </button>
               </div>
 
               <div class="flex items-center gap-2">
-                <button id="addProductBtn" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">+ Add Product</button>
-                <button id="resetProductClicksBtn" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-rose-50">Reset Clicks</button>
+                <button id="addProductBtn" class="rounded-xl border theme-border bg-white px-4 py-2 text-sm font-semibold hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition">+ Add Product</button>
+                <button id="resetProductClicksBtn" class="rounded-xl border theme-border bg-white px-4 py-2 text-sm font-semibold hover:bg-rose-50 dark:bg-zinc-800 dark:hover:bg-rose-900/20 text-rose-600 transition">Reset Clicks</button>
               </div>
             </div>
           </div>
 
-          <ul id="productsEditor" class="space-y-2"></ul>
-          <div id="adminPager" class="mt-4 flex items-center justify-between gap-3">
-            <button id="adminPrevPage" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">
-              Previous
+          <ul id="productsEditor" class="grid grid-cols-1 gap-4"></ul>
+          
+          <div id="adminPager" class="flex items-center justify-between gap-3 bg-zinc-50 dark:bg-zinc-800/40 p-3 rounded-2xl border theme-border">
+            <button id="adminPrevPage" class="rounded-xl border theme-border bg-white px-4 py-2 text-sm font-semibold hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition">
+              <i class="fa-solid fa-chevron-left mr-1"></i>Previous Page
             </button>
 
-            <div class="text-sm theme-muted">
-              Page <b id="adminPageNum">1</b>
+            <div class="text-sm font-semibold">
+              Page <span id="adminPageNum" class="text-blue-600 dark:text-blue-400">1</span>
             </div>
 
-            <button id="adminNextPage" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">
-              Next
+            <button id="adminNextPage" class="rounded-xl border theme-border bg-white px-4 py-2 text-sm font-semibold hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition">
+              Next Page<i class="fa-solid fa-chevron-right ml-1"></i>
             </button>
           </div>
 
           <!-- bottom add button so you don’t have to scroll up -->
-          <div class="pt-3 flex justify-between">
-            <button id="saveBtnBottom" class="btn rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">
-              Save to Server
+          <div class="pt-2 flex justify-between">
+            <button id="saveBtnBottom" class="btn rounded-xl border theme-border bg-white px-4 py-2 text-sm font-semibold hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition">
+              <i class="fa-solid fa-cloud-arrow-up mr-1.5"></i>Save to Server
             </button>
           
-            <button id="addProductBtnBottom" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">
+            <button id="addProductBtnBottom" class="rounded-xl border theme-border bg-white px-4 py-2 text-sm font-semibold hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition">
               + Add Product
             </button>
           </div>
-          <p class="mt-2 text-xs theme-muted">
-            Fields: <code>borderColor</code> (outline), <code>textColor</code> (text), <code>priceColor</code> (price), and product name supports line breaks.
-            <span class="ml-2">Admin numbering is shown on cards + rows while in admin mode.</span>
-          </p>
-        </div>    
+        </div>
+      </div>
     </section>
     
     <section class="theme-card mt-10 max-w-3xl mx-auto p-6 text-center">
@@ -577,6 +604,49 @@
       </div>
     </li>
   </template>
+
+  <!-- Admin Login Modal -->
+  <div id="adminLoginModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+    <div class="relative w-full max-w-md scale-95 transform rounded-2xl border theme-border bg-white p-6 shadow-2xl transition-all duration-300 dark:bg-zinc-900 dark:text-white">
+      <button id="closeLoginModal" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200" type="button">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+      
+      <div class="flex flex-col items-center text-center">
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 animate-pulse">
+          <i class="fa-solid fa-lock text-xl"></i>
+        </div>
+        <h3 class="text-xl font-bold tracking-tight">Admin Authentication</h3>
+        <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+          Enter your editor credentials to unlock the products administrator panel and styling controls.
+        </p>
+      </div>
+
+      <form id="adminLoginForm" class="mt-6 space-y-4">
+        <div>
+          <label for="adminPasswordInput" class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+            Password
+          </label>
+          <div class="relative mt-2">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-zinc-400">
+              <i class="fa-solid fa-key"></i>
+            </span>
+            <input id="adminPasswordInput" type="password" required
+                   class="w-full rounded-xl border theme-border bg-zinc-50 pl-10 pr-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-zinc-800"
+                   placeholder="Enter admin password..." />
+          </div>
+          <p id="loginErrorMsg" class="mt-2 hidden text-xs text-rose-500 font-medium">
+            <i class="fa-solid fa-circle-exclamation mr-1"></i> Incorrect password. Please try again.
+          </p>
+        </div>
+
+        <button type="submit" 
+                class="w-full rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-blue-700 active:scale-[0.98] transition">
+          Unlock Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
 
   <!-- Footer Placeholder -->
   <div id="footer-placeholder"></div>

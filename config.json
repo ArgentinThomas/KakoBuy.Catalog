@@ -1,4 +1,5 @@
 {
+  "adminPassword": "admin123",
   "profile": {
     "name": "KakoBuy Products",
     "bio": "Curated items with images, sellers, and categories.",

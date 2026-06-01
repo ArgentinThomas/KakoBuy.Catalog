@@ -130,7 +130,7 @@ function renderNextProductBatch(idxMap){
 
 const $ = (s) => document.querySelector(s);
 const el = (t,c)=>{ const e=document.createElement(t); if(c) e.className=c; return e; };
-function isAdmin(){ return new URLSearchParams(location.search).get('admin') === '1' || adminHotkey; }
+function isAdmin(){ return new URLSearchParams(location.search).get('admin') === '1' || localStorage.getItem('isAdmin') === 'true' || adminHotkey; }
 
 function getUrlCat(){
   const sp = new URLSearchParams(location.search);
@@ -497,6 +497,19 @@ function renderHeader(){
     sWrap.appendChild(d);
   }
 
+  // Admin Lock Toggle Button
+  if (!document.getElementById('adminLoginBtn')) {
+    const ab = document.createElement('button');
+    ab.id = 'adminLoginBtn';
+    ab.type = 'button';
+    ab.title = isAdmin() ? 'Log out of admin' : 'Log in as admin';
+    ab.className = 'icon-btn border theme-border bg-white hover:bg-zinc-50 transition ml-2 dark:bg-zinc-800 dark:hover:bg-zinc-700';
+    ab.innerHTML = isAdmin() 
+      ? '<i class="fa-solid fa-lock-open text-blue-600 dark:text-blue-400"></i>' 
+      : '<i class="fa-solid fa-lock"></i>';
+    sWrap.appendChild(ab);
+  }
+
   if (typeof updateDarkButton === 'function') updateDarkButton();
 
   renderBanner();
@@ -825,6 +838,7 @@ function renderAdmin(){
   document.getElementById('iName').value = data.profile?.name || '';
   document.getElementById('iBio').value = data.profile?.bio || '';
   document.getElementById('iAvatar').value = data.profile?.avatar || '';
+  document.getElementById('iAdminPassword').value = data.adminPassword || '';
 
   if (!data.theme) data.theme = {};
   document.getElementById('iFont').value = data.theme.font || 'Inter';
@@ -1214,6 +1228,7 @@ function renderProductsEditor(){
 }
 
 function ensureDefaults(){
+  if (!data.adminPassword) data.adminPassword = 'admin123';
   if (!data.profile) data.profile = { name:'', bio:'', avatar:'', socials:[] };
   if (!Array.isArray(data.profile.socials)) data.profile.socials = [];
   if (!data.page) data.page = {};
@@ -1251,6 +1266,7 @@ document.addEventListener('input', (e)=>{
   if (t.id === 'iName') { data.profile.name = t.value; renderPublicDebounced(); }
   else if (t.id === 'iBio') { data.profile.bio = t.value; renderPublicDebounced(); }
   else if (t.id === 'iAvatar') { data.profile.avatar = t.value; renderPublicDebounced(); }
+  else if (t.id === 'iAdminPassword') { data.adminPassword = t.value; }
 
   else if (t.id === 'iPrimary') { data.theme.primary = t.value; applyTheme(); }
   else if (t.id === 'iBg') { data.theme.bg = t.value; applyTheme(); }
@@ -1756,5 +1772,104 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .catch(err => console.warn(err));
 });
+
+// Admin Login Modal & Tabs Wire Up
+(function wireAdminDashboard() {
+  // Modal toggle
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('#adminLoginBtn');
+    if (!btn) return;
+    e.preventDefault();
+    
+    if (isAdmin()) {
+      if (confirm('Do you want to log out of admin mode?')) {
+        localStorage.removeItem('isAdmin');
+        // If there's an admin parameter in the URL, remove it too
+        const u = new URL(location.href);
+        u.searchParams.delete('admin');
+        location.href = u.pathname + u.search;
+      }
+    } else {
+      const modal = document.getElementById('adminLoginModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => {
+          modal.classList.remove('opacity-0');
+          modal.querySelector('.transform').classList.remove('scale-95');
+          modal.querySelector('.transform').classList.add('scale-100');
+          modal.querySelector('input').focus();
+        }, 10);
+      }
+    }
+  });
+
+  const closeModal = () => {
+    const modal = document.getElementById('adminLoginModal');
+    if (modal) {
+      modal.classList.add('opacity-0');
+      modal.querySelector('.transform').classList.remove('scale-100');
+      modal.querySelector('.transform').classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.getElementById('loginErrorMsg').classList.add('hidden');
+        document.getElementById('adminPasswordInput').value = '';
+      }, 300);
+    }
+  };
+
+  document.getElementById('closeLoginModal')?.addEventListener('click', closeModal);
+  
+  // Close on clicking backdrop
+  document.getElementById('adminLoginModal')?.addEventListener('click', (e) => {
+    if (e.target.id === 'adminLoginModal') {
+      closeModal();
+    }
+  });
+
+  // Login form submit
+  document.getElementById('adminLoginForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = document.getElementById('adminPasswordInput').value;
+    const actualPass = data?.adminPassword || 'admin123';
+    
+    if (input === actualPass) {
+      localStorage.setItem('isAdmin', 'true');
+      closeModal();
+      location.reload();
+    } else {
+      document.getElementById('loginErrorMsg').classList.remove('hidden');
+      const inputEl = document.getElementById('adminPasswordInput');
+      inputEl.focus();
+      inputEl.select();
+    }
+  });
+
+  // Tabs Switching
+  const tabs = ['General', 'Links', 'Products'];
+  tabs.forEach(tabName => {
+    const btn = document.getElementById(`btnTab${tabName}`);
+    btn?.addEventListener('click', () => {
+      // Deactivate all
+      tabs.forEach(tName => {
+        const b = document.getElementById(`btnTab${tName}`);
+        const content = document.getElementById(`adminTab-${tName.toLowerCase()}`);
+        if (b) {
+          b.classList.remove('active', 'border-b-2', 'border-blue-600', 'text-blue-600', 'dark:text-blue-400', 'dark:border-blue-400');
+          b.classList.add('border-transparent', 'text-zinc-500', 'dark:text-zinc-400');
+        }
+        if (content) content.classList.add('hidden');
+      });
+
+      // Activate clicked
+      btn.classList.add('active', 'border-b-2', 'border-blue-600', 'text-blue-600', 'dark:text-blue-400', 'dark:border-blue-400');
+      btn.classList.remove('border-transparent', 'text-zinc-500', 'dark:text-zinc-400');
+      
+      const activeContent = document.getElementById(`adminTab-${tabName.toLowerCase()}`);
+      if (activeContent) activeContent.classList.remove('hidden');
+    });
+  });
+})();
 
 init();
