@@ -1,0 +1,229 @@
+{
+  "profile": {
+    "name": "KakoBuy Products",
+    "bio": "Curated items with images, sellers, and categories.",
+    "avatar": "https://ogkako.com/favicon-32x32.png",
+    "socials": [
+      {
+        "url": "https://instagram.com/ogkako",
+        "label": "Instagram"
+      },
+      {
+        "url": "https://tiktok.com/@ogkako",
+        "label": "TikTok"
+      }
+    ]
+  },
+  "theme": {
+    "font": "Inter",
+    "primary": "#2563eb",
+    "bg": "#fafafa",
+    "text": "#0a0a0a",
+    "border": "#e4e4e7",
+    "titleStyle": "a",
+    "titleGlow": true
+  },
+  "page": {
+    "productsColsDesktop": 4,
+    "productsTitle": "Kakobuy Products — Verified Picks",
+    "productsSubtitle": "Curated items with images, sellers, and categories — maintained by OGKako.com."
+  },
+  "banner": {
+    "enabled": false,
+    "text": "Notice: This catalog is for demonstration and testing purposes.",
+    "bg": "#fee2e2",
+    "textColor": "#b91c1c",
+    "borderColor": "#fecaca",
+    "bold": true
+  },
+  "ctas": [
+    {
+      "label": "Open Kakobuy Spreadsheet",
+      "url": "/kakobuy-spreadsheet.html",
+      "variant": "filled"
+    }
+  ],
+  "categoryLinks": [],
+  "products": [
+    {
+      "id": "p1",
+      "label": "Wireless Noise-Cancelling Headphones",
+      "url": "https://weidian.com/item.html?itemID=12345601",
+      "image": "",
+      "price": "249.00 EUR",
+      "seller": "Weidian Seller A",
+      "category": "Electronics",
+      "updated": "2026-06-01",
+      "enabled": true,
+      "clicks": 0,
+      "borderColor": "#1f6feb",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    },
+    {
+      "id": "p2",
+      "label": "Runner Pro Sneakers",
+      "url": "https://weidian.com/item.html?itemID=12345602",
+      "image": "",
+      "price": "139.90 EUR",
+      "seller": "Sneaker Shop",
+      "category": "Sneakers",
+      "updated": "2026-06-01",
+      "enabled": true,
+      "clicks": 0,
+      "borderColor": "#c6ff00",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    },
+    {
+      "id": "p3",
+      "label": "Mechanical Keyboard 75%",
+      "url": "https://weidian.com/item.html?itemID=12345603",
+      "image": "",
+      "price": "119.00 EUR",
+      "seller": "Keyboards Store",
+      "category": "Electronics",
+      "updated": "2026-06-01",
+      "enabled": true,
+      "clicks": 0,
+      "borderColor": "#ff6b6b",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    },
+    {
+      "id": "p4",
+      "label": "High-Top Canvas Sneakers",
+      "url": "https://weidian.com/item.html?itemID=12345604",
+      "image": "",
+      "price": "89.00 EUR",
+      "seller": "Sneaker Shop",
+      "category": "Sneakers",
+      "updated": "2026-06-01",
+      "enabled": false,
+      "clicks": 0,
+      "borderColor": "#ff9f1c",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    },
+    {
+      "id": "p5",
+      "label": "Smartwatch Series X",
+      "url": "https://weidian.com/item.html?itemID=12345605",
+      "image": "",
+      "price": "299.00 EUR",
+      "seller": "Weidian Seller A",
+      "category": "Electronics",
+      "updated": "2026-06-01",
+      "enabled": true,
+      "clicks": 0,
+      "borderColor": "#9b5de5",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    },
+    {
+      "id": "p6",
+      "label": "Retro Court Sneakers",
+      "url": "https://weidian.com/item.html?itemID=12345606",
+      "image": "",
+      "price": "109.50 EUR",
+      "seller": "Sneaker Shop",
+      "category": "Sneakers",
+      "updated": "2026-06-01",
+      "enabled": true,
+      "clicks": 0,
+      "borderColor": "#00bbf9",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    },
+    {
+      "id": "p7",
+      "label": "Portable Bluetooth Speaker",
+      "url": "https://weidian.com/item.html?itemID=12345607",
+      "image": "",
+      "price": "79.00 EUR",
+      "seller": "Weidian Seller A",
+      "category": "Electronics",
+      "updated": "2026-06-01",
+      "enabled": true,
+      "clicks": 0,
+      "borderColor": "#f15bb5",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    },
+    {
+      "id": "p8",
+      "label": "Trail Running Sneakers",
+      "url": "https://weidian.com/item.html?itemID=12345608",
+      "image": "",
+      "price": "159.00 EUR",
+      "seller": "Sneaker Shop",
+      "category": "Sneakers",
+      "updated": "2026-06-01",
+      "enabled": true,
+      "clicks": 0,
+      "borderColor": "#06d6a0",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    },
+    {
+      "id": "p9",
+      "label": "Action Camera 4K",
+      "url": "https://weidian.com/item.html?itemID=12345609",
+      "image": "",
+      "price": "219.00 EUR",
+      "seller": "Weidian Seller A",
+      "category": "Electronics",
+      "updated": "2026-06-01",
+      "enabled": false,
+      "clicks": 0,
+      "borderColor": "#ffd166",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    },
+    {
+      "id": "p10",
+      "label": "Chunky Dad Sneakers",
+      "url": "https://weidian.com/item.html?itemID=12345610",
+      "image": "",
+      "price": "129.00 EUR",
+      "seller": "Sneaker Shop",
+      "category": "Sneakers",
+      "updated": "2026-06-01",
+      "enabled": true,
+      "clicks": 0,
+      "borderColor": "#ef476f",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    },
+    {
+      "id": "p11",
+      "label": "USB-C Fast Charger 65W",
+      "url": "https://weidian.com/item.html?itemID=12345611",
+      "image": "",
+      "price": "39.90 EUR",
+      "seller": "Weidian Seller A",
+      "category": "Electronics",
+      "updated": "2026-06-01",
+      "enabled": true,
+      "clicks": 0,
+      "borderColor": "#118ab2",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    },
+    {
+      "id": "p12",
+      "label": "Minimalist Slip-On Sneakers",
+      "url": "https://weidian.com/item.html?itemID=12345612",
+      "image": "",
+      "price": "95.00 EUR",
+      "seller": "Sneaker Shop",
+      "category": "Sneakers",
+      "updated": "2026-06-01",
+      "enabled": true,
+      "clicks": 0,
+      "borderColor": "#8338ec",
+      "textColor": "#0a0a0a",
+      "priceColor": "#dc2626"
+    }
+  ]
+}

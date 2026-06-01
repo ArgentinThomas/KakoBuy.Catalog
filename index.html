@@ -1,73 +1,587 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NOIR — Catalogo Prodotti</title>
-  <meta name="description" content="Catalogo prodotti in dark mode con ricerca e filtri per categoria." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Basic SEO -->
+  <title>Kakobuy Products 2026 – Direct Listings | OGKako</title>
+  <meta name="description" content="Browse Kakobuy product listings with images, prices, sellers, and organized categories. Explore updated Kakobuy products faster with OGKako." />
+
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ogkako.com/products.html" />
+  <meta property="og:title" content="Kakobuy Products 2026 – Direct Listings | OGKako" />
+  <meta property="og:description" content="Browse Kakobuy product listings with images, prices, sellers, and organized categories. Explore updated Kakobuy products faster with OGKako." />
+  <meta property="og:image" content="https://ogkako.com/og-image.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://ogkako.com/products.html" />
+  <meta name="twitter:title" content="Kakobuy Products 2026 – Direct Listings | OGKako" />
+  <meta name="twitter:description" content="Browse Kakobuy product listings with images, prices, sellers, and organized categories. Explore updated Kakobuy products faster with OGKako." />
+  <meta name="twitter:image" content="https://ogkako.com/og-image.png" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://ogkako.com/products.html" />
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow" />
+
+  <!-- Fonts & Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="glow" aria-hidden="true"></div>
+  <link id="googleFontLink" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <header class="site-header">
-    <div class="brand">
-      <span class="brand-mark">◆</span>
-      <span class="brand-name">NOIR<span class="brand-dot">.</span>store</span>
-    </div>
-    <div class="header-meta">
-      <span id="count-pill" class="pill">— prodotti</span>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <script>
+    // Prevent Google from indexing admin mode
+    if (window.location.search.includes('admin=1')) {
+      const meta = document.createElement('meta');
+      meta.name = 'robots';
+      meta.content = 'noindex, nofollow';
+      document.head.appendChild(meta);
+    }
+  </script>
+</head>
+
+<body class="min-h-screen">
+  <header class="border-b theme-border bg-white/90 sticky top-0 z-10 backdrop-blur">
+    <div class="mx-auto max-w-6xl px-4 py-3 flex flex-wrap sm:flex-nowrap items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img id="avatar" src="" alt="" class="h-8 w-8 rounded-full ring-2 theme-border object-cover" />
+        <div>
+          <div id="name" class="font-semibold"></div>
+          <div id="bio" class="text-xs theme-muted"></div>
+        </div>
+      </div>
+
+      <div id="socials"
+           class="flex items-center gap-2 w-full justify-center mt-2
+                  sm:w-auto sm:justify-end sm:mt-0">
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>Il catalogo.<br /><span class="hero-accent">Tutto in un posto.</span></h1>
-      <p class="hero-sub">Cerca, filtra per categoria e trova quello che ti serve.</p>
+  <div id="topBanner" class="text-xs sm:text-sm text-center px-3 py-2 hidden">
+    <span id="topBannerText"></span>
+  </div>
+
+  <main class="mx-auto max-w-6xl px-4 py-8">
+    <section id="ctaSection" class="mb-8 hidden flex flex-wrap justify-center gap-3"></section>
+
+    <section class="mb-6 text-center hidden md:block">
+      <h1 id="pageTitle" class="text-3xl sm:text-4xl font-extrabold tracking-tight theme-title">
+        Kakobuy Products — Verified Picks
+      </h1>
+      <p id="pageSubtitle" class="mt-2 theme-muted"></p>
+      <hr class="mt-6 theme-border border-t hidden" />
     </section>
 
-    <section class="controls">
-      <div class="search-wrap">
-        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="11" cy="11" r="7"></circle>
-          <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
-        </svg>
-        <input
-          type="search"
-          id="search"
-          placeholder="Cerca un prodotto…"
-          autocomplete="off"
-          aria-label="Cerca prodotti"
-        />
+    <section class="mb-4">
+      <div class="flex flex-col gap-3">
+        <div class="flex flex-col gap-3">
+          <div class="flex gap-2">
+            <input id="q" type="search" class="w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none"
+                   placeholder="Search (label, seller, category)..." />
+            <button id="searchGoBtn" class="rounded-xl border theme-border bg-white px-3" type="button">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+          <select id="cat" class="hidden">
+            <option value="">All categories</option>
+          </select>
+
+          <div id="catPills" class="flex flex-wrap gap-2"></div>
+
+          <div id="filterTip" class="hidden mt-2 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800">
+            Tip: search and category filters are both active. Clear search if results look empty.
+          </div>
+        </div>
+
+        <div class="mt-2 flex items-center gap-3 flex-wrap">
+          <div class="text-sm theme-muted">
+            Showing <b id="count">0</b>
+          </div>
+          <button id="favFilterBtn" class="btn rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">
+            ❤️ Favorites
+          </button>
+          <button id="clearBtn" class="btn rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">
+            Clear
+          </button>
+        </div>
       </div>
+    </section>
 
-      <div class="filters" id="filters" role="group" aria-label="Filtri categoria"></div>
+    <div class="mb-4 flex flex-wrap items-center gap-2">
+      <a href="/"
+         class="inline-flex items-center gap-2 rounded-xl border theme-border bg-white px-4 py-2 text-sm font-semibold hover:bg-zinc-50 transition">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Home
+      </a>
 
-      <div class="sort-wrap">
-        <select id="sort" aria-label="Ordina prodotti">
-          <option value="default">Ordina: rilevanza</option>
-          <option value="price-asc">Prezzo: crescente</option>
-          <option value="price-desc">Prezzo: decrescente</option>
-          <option value="name-asc">Nome: A–Z</option>
-        </select>
+      <!-- optional little pill showing URL category mode -->
+      <span id="urlCatPill" class="hidden pill">
+        <i class="fa-solid fa-filter"></i>
+        <span id="urlCatPillText"></span>
+      </span>
+    </div>
+
+    <!-- Category “other links” cards -->
+    <section id="categoryLinksWrap" class="hidden mb-6">
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="text-base sm:text-lg font-semibold">Category Links</h2>
+        <div class="text-xs theme-muted">Useful shortcuts for this category</div>
+      </div>
+      <div id="categoryLinksGrid" class="product-grid"></div>
+    </section>
+
+    <section aria-label="Products">
+      <div id="productsGrid" class="product-grid"></div>
+
+      <div id="emptyState" class="hidden mt-8 rounded-2xl border theme-border bg-white p-6 text-center">
+        <div class="text-lg font-semibold">No products yet</div>
       </div>
     </section>
 
-    <section class="grid" id="grid" aria-live="polite"></section>
+    <!-- Admin panel -->
+    <section id="adminPanel" class="mt-10 hidden">
+      <div class="rounded-2xl border theme-border bg-white p-5 shadow-sm">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-lg font-semibold">Products Admin</h2>
+          <div class="flex items-center gap-2">
+            <button id="saveBtn" class="btn rounded-lg border theme-border bg-white px-3 py-1.5 text-sm hover:bg-zinc-50">Save to Server</button>
+            <button id="loadBtn" class="btn rounded-lg border theme-border bg-white px-3 py-1.5 text-sm hover:bg-zinc-50">Reload</button>
+          </div>
+        </div>
 
-    <section class="empty" id="empty" hidden>
-      <p class="empty-title">Nessun risultato</p>
-      <p class="empty-sub">Prova a modificare la ricerca o i filtri.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:items-start">
+          <div class="space-y-3 self-start">
+            <h3 class="font-medium">Header (shared config)</h3>
+
+            <label class="block text-sm">Brand / Name
+              <input id="iName" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none" />
+            </label>
+
+            <label class="block text-sm">Tagline
+              <input id="iBio" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none" />
+            </label>
+
+            <label class="block text-sm">Avatar URL
+              <input id="iAvatar" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none" />
+            </label>
+          </div>
+
+          <div class="space-y-3 self-start">
+            <h3 class="font-medium">Theme (shared config)</h3>
+
+            <div class="rounded-xl border theme-border p-3">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <label class="block text-sm">Font
+                  <select id="iFont" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none">
+                    <option value="Inter">Inter</option>
+                    <option value="Roboto">Roboto</option>
+                    <option value="Open Sans">Open Sans</option>
+                    <option value="Poppins">Poppins</option>
+                    <option value="Montserrat">Montserrat</option>
+                  </select>
+                </label>
+
+                <label class="block text-sm">Primary
+                  <input id="iPrimary" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
+                </label>
+
+                <label class="block text-sm">Background
+                  <input id="iBg" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
+                </label>
+
+                <label class="block text-sm">Text
+                  <input id="iText" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
+                </label>
+
+                <label class="block text-sm">Border
+                  <input id="iBorder" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
+                </label>
+
+                <label class="block text-sm">Desktop columns (products + links)
+                  <select id="iColsDesktop" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none">
+                    <option value="3">3</option>
+                    <option value="4" selected>4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                </label>
+
+                <label class="block text-sm">Title style
+                  <select id="iTitleStyle" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none">
+                    <option value="a">Option A (premium gradient)</option>
+                    <option value="b">Option B (embossed outline)</option>
+                  </select>
+                </label>
+
+                <label class="inline-flex items-center gap-2 text-sm mt-2">
+                  <input id="iTitleGlow" type="checkbox" class="rounded" />
+                  Title: subtle glow
+                </label>
+              </div>
+            </div>
+
+            <div class="rounded-xl border theme-border p-3 space-y-2 mt-3">
+              <h3 class="font-medium">Top Warning Banner</h3>
+              <label class="inline-flex items-center gap-2 text-sm">
+                <input id="iBannerEnabled" type="checkbox" class="rounded" />
+                Show warning banner at top of page
+              </label>
+              <label class="inline-flex items-center gap-2 text-sm">
+                <input id="iBannerBold" type="checkbox" class="rounded" />
+                Bold banner text
+              </label>
+              <label class="block text-sm">Banner Text
+                <textarea id="iBannerText" rows="2" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none"></textarea>
+              </label>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <label class="block text-sm">Background
+                  <input id="iBannerBg" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
+                </label>
+                <label class="block text-sm">Text Color
+                  <input id="iBannerTextColor" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
+                </label>
+                <label class="block text-sm">Border Color
+                  <input id="iBannerBorderColor" type="color" class="mt-1 h-10 w-full rounded-xl border theme-border bg-white px-2 py-1" />
+                </label>
+              </div>
+              <p class="text-xs theme-muted">HTML is allowed in banner text.</p>
+            </div>
+
+            <div class="rounded-xl border theme-border p-3 space-y-2 mt-3">
+              <h3 class="font-medium">Products Page Text</h3>
+              <label class="block text-sm">Page Title
+                <input id="iProductsTitle" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none" placeholder="Kakobuy Products — Verified Picks" />
+              </label>
+              <label class="block text-sm">Page Subtitle
+                <input id="iProductsSubtitle" class="mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 outline-none" placeholder="Curated items with images..." />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Links editor -->
+        <details class="mt-6 rounded-xl border theme-border bg-white-50 p-4 space-y-3">
+          <summary class="cursor-pointer list-none font-medium text-base flex items-center justify-between">
+            <span>Category Link Cards (shown above products)</span>
+            <span class="text-xs theme-muted">Click to expand/collapse</span>
+          </summary>
+        
+          <div class="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <h3 class="font-medium">Category Link Cards (shown above products)</h3>
+            <div class="flex items-center gap-2">
+              <button id="addCatLinkBtn" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">+ Add Link Card</button>
+              <select id="iCatLinksFilter" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none">
+                <option value="">All categories</option>
+              </select>
+            </div>
+          </div>
+        
+          <ul id="catLinksEditor" class="space-y-2"></ul>
+        
+          <p class="mt-2 text-xs theme-muted">
+            These cards appear when a category is selected (or when the URL has <code>?cat=CategoryName</code>).
+          </p>
+        </details>
+
+        <div class="mt-6 rounded-xl border theme-border bg-pink-50 p-4 space-y-3">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+            <h3 class="font-medium">Products</h3>
+
+            <!-- admin find box (jump to # / text) -->
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+              <div class="flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-xl px-2 py-1">
+                <input id="adminFind" class="w-64 rounded-lg bg-white px-3 py-2 text-sm outline-none"
+                       placeholder="🔍 Jump to # (e.g. 500) or search..." />
+                <button id="adminFindBtn" class="rounded-lg bg-blue-600 text-white px-3 py-2 text-sm hover:bg-blue-700">
+                  Go
+                </button>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button id="addProductBtn" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">+ Add Product</button>
+                <button id="resetProductClicksBtn" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-rose-50">Reset Clicks</button>
+              </div>
+            </div>
+          </div>
+
+          <ul id="productsEditor" class="space-y-2"></ul>
+          <div id="adminPager" class="mt-4 flex items-center justify-between gap-3">
+            <button id="adminPrevPage" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">
+              Previous
+            </button>
+
+            <div class="text-sm theme-muted">
+              Page <b id="adminPageNum">1</b>
+            </div>
+
+            <button id="adminNextPage" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">
+              Next
+            </button>
+          </div>
+
+          <!-- bottom add button so you don’t have to scroll up -->
+          <div class="pt-3 flex justify-between">
+            <button id="saveBtnBottom" class="btn rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">
+              Save to Server
+            </button>
+          
+            <button id="addProductBtnBottom" class="rounded-xl border theme-border bg-white px-3 py-2 text-sm hover:bg-zinc-50">
+              + Add Product
+            </button>
+          </div>
+          <p class="mt-2 text-xs theme-muted">
+            Fields: <code>borderColor</code> (outline), <code>textColor</code> (text), <code>priceColor</code> (price), and product name supports line breaks.
+            <span class="ml-2">Admin numbering is shown on cards + rows while in admin mode.</span>
+          </p>
+        </div>    
     </section>
+    
+    <section class="theme-card mt-10 max-w-3xl mx-auto p-6 text-center">
+      <h2 class="text-lg font-bold theme-title">Kakobuy Spreadsheet 2026</h2>
+      <p class="text-sm theme-muted mt-2">
+        Browse the full Kakobuy spreadsheet with verified links and organized categories.
+      </p>
+      <a href="/kakobuy-spreadsheet.html" class="inline-block mt-4 theme-cta px-5 py-2 rounded-xl text-sm font-semibold">
+        Open Kakobuy Spreadsheet
+      </a>
+    </section>
+
+    <div class="pt-2 space-y-3">
+      <div class="flex flex-wrap justify-center gap-3 text-sm">
+        <a href="/" class="underline hover:text-black">Home</a>
+        <span>•</span>
+        <a href="/products.html" class="underline hover:text-black">All Products</a>
+        <span>•</span>
+        <a href="/kakobuy-guide.html" class="underline hover:text-black">Guide</a>
+        <span>•</span>
+        <a href="/agents.html" class="underline hover:text-black">Agents</a>
+        <span>•</span>
+        <a href="/kakobuy-spreadsheet.html" class="underline hover:text-black">Spreadsheet</a>
+      </div>
+   
+      <div class="flex flex-wrap justify-center gap-3 text-xs theme-muted">
+        <a href="/products.html?cat=Shoes" class="hover:text-black">Shoes</a>
+        <a href="/products.html?cat=Hoodies" class="hover:text-black">Hoodies</a>
+        <a href="/products.html?cat=Jeans" class="hover:text-black">Jeans</a>
+        <a href="/products.html?cat=Accessories" class="hover:text-black">Accessories</a>
+        <a href="/products.html?cat=Electronics" class="hover:text-black">Electronics</a>
+      </div>
+    </div>
   </main>
 
-  <footer class="site-footer">
-    <p>NOIR.store — demo catalogo. Modifica <code>products.json</code> per i tuoi prodotti.</p>
-  </footer>
+  <button id="backTopBtn" type="button">↑ Top</button>
 
-  <script src="app.js"></script>
+  <button id="floatingFavBtn" class="floating-fav-btn" type="button">
+    ❤️ Favorites
+  </button>
+
+  <!-- Templates -->
+  <template id="productRowTpl">
+    <li class="group rounded-2xl border theme-border bg-white p-4 space-y-3" draggable="true">
+      <div class="flex items-center gap-2">
+        <button class="handle rounded-lg border theme-border bg-white px-2 py-1 text-xs opacity-70 group-hover:opacity-100"
+                title="Drag to reorder">⇅</button>
+
+        <!-- row number -->
+        <span class="p-num admin-num-chip" title="Product number">#000</span>
+        <div class="flex items-center gap-2">
+          <input class="p-move w-20 rounded-lg border theme-border bg-white px-2 py-1 text-xs outline-none"
+                 type="number" min="1" placeholder="Move to" title="Move this product to position..." />
+          <button class="move-product rounded-lg border theme-border bg-white px-2 py-1 text-xs hover:bg-zinc-50"
+                  type="button" title="Move product to entered position">
+            Move
+          </button>
+        </div>
+
+        <div class="ml-auto flex items-center gap-2">
+          <label class="flex items-center gap-1 text-xs opacity-80" title="Toggle visibility">
+            <input type="checkbox" class="p-enabled" checked />
+            Visible
+          </label>
+
+          <span class="text-xs theme-muted">Clicks: <b class="p-clicks">0</b></span>
+
+          <button class="del-product rounded-xl bg-rose-50 px-2 py-1 text-xs text-rose-700 border border-rose-200 hover:bg-rose-100"
+                  title="Delete product">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <label class="block text-sm md:col-span-2">
+          Product Name (you can press Enter)
+          <textarea class="p-label mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"
+                    rows="2" placeholder="AF 1&#10;(2 colors)"></textarea>
+        </label>
+
+        <label class="block text-sm">
+          Product URL
+          <input class="p-url mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"
+                 placeholder="https://..." />
+        </label>
+
+        <label class="block text-sm">
+          Price
+          <input class="p-price mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"
+                 placeholder="$14 USD" />
+        </label>
+
+        <label class="block text-sm md:col-span-2">
+          Image URL
+          <input class="p-image mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"
+                 placeholder="https://.../image.png" />
+        </label>
+
+        <label class="block text-sm">
+          Seller
+          <input class="p-seller mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"
+                 placeholder="Weidian Seller A" />
+        </label>
+
+        <div class="block text-sm">
+          <label class="block text-sm">
+            Category
+            <select class="p-category-select mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none">
+              <option value="">(none)</option>
+              <option value="__new__">+ Add new category…</option>
+            </select>
+          </label>
+
+          <label class="block text-sm mt-2 p-category-new-wrap hidden">
+            New Category
+            <input class="p-category-new mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"
+                   placeholder="Type a new category name..." />
+          </label>
+        </div>
+
+        <label class="block text-sm">
+          Updated
+          <input class="p-updated mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"
+                 placeholder="YYYY-MM-DD" />
+        </label>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 pt-1">
+        <div class="flex items-center gap-2">
+          <span class="text-xs theme-muted">Outline</span>
+          <input class="p-border h-9 w-12 rounded-lg border theme-border bg-white p-1 cursor-pointer" type="color" title="Card outline color" />
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="text-xs theme-muted">Text</span>
+          <input class="p-text h-9 w-12 rounded-lg border theme-border bg-white p-1 cursor-pointer" type="color" title="Card text color" />
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="text-xs theme-muted">Price</span>
+          <input class="p-pricecolor h-9 w-12 rounded-lg border theme-border bg-white p-1 cursor-pointer" type="color" title="Price color" />
+        </div>
+      </div>
+    </li>
+  </template>
+
+  <template id="catLinkRowTpl">
+    <li class="group rounded-2xl border theme-border bg-white p-4 space-y-3" draggable="true">
+      <div class="flex items-center gap-2">
+        <button class="handle rounded-lg border theme-border bg-white px-2 py-1 text-xs opacity-70 group-hover:opacity-100"
+                title="Drag to reorder">⇅</button>
+
+        <div class="ml-auto flex items-center gap-2">
+          <label class="flex items-center gap-1 text-xs opacity-80" title="Toggle visibility">
+            <input type="checkbox" class="cl-enabled" checked />
+            Visible
+          </label>
+
+          <button class="del-link rounded-xl bg-rose-50 px-2 py-1 text-xs text-rose-700 border border-rose-200 hover:bg-rose-100"
+                  title="Delete link">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <label class="block text-sm md:col-span-2">
+          Card Title (you can press Enter)
+          <textarea class="cl-label mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"
+                    rows="2" placeholder="Hoodies&#10;10,000+ Links"></textarea>
+        </label>
+
+        <label class="block text-sm md:col-span-2">
+          URL
+          <input class="cl-url mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"
+                 placeholder="https://..." />
+        </label>
+
+        <label class="block text-sm md:col-span-2">
+          Image URL (optional)
+          <input class="cl-image mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"
+                 placeholder="https://.../icon.png" />
+        </label>
+
+        <div class="block text-sm">
+          <label class="block text-sm">
+            Category (must match product category)
+            <select class="cl-category-select mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"></select>
+          </label>
+
+          <label class="block text-sm mt-2 cl-category-new-wrap hidden">
+            New Category
+            <input class="cl-category-new mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none"
+                   placeholder="Type a new category and press Enter" />
+          </label>
+        </div>
+
+        <label class="block text-sm">
+          Style
+          <select class="cl-variant mt-1 w-full rounded-xl border theme-border bg-white px-3 py-2 text-sm outline-none">
+            <option value="card">Card</option>
+            <option value="outline">Outline</option>
+            <option value="filled">Filled</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 pt-1">
+        <div class="flex items-center gap-2">
+          <span class="text-xs theme-muted">Outline</span>
+          <input class="cl-border h-9 w-12 rounded-lg border theme-border bg-white p-1 cursor-pointer" type="color" title="Card outline color" />
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="text-xs theme-muted">Text</span>
+          <input class="cl-text h-9 w-12 rounded-lg border theme-border bg-white p-1 cursor-pointer" type="color" title="Card text color" />
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="text-xs theme-muted">Accent</span>
+          <input class="cl-pricecolor h-9 w-12 rounded-lg border theme-border bg-white p-1 cursor-pointer" type="color" title="Accent color" />
+        </div>
+      </div>
+    </li>
+  </template>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Application script bundle -->
+  <script src="app.js" defer></script>
 </body>
 </html>
